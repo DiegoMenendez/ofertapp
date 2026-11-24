@@ -1,0 +1,405 @@
+DOCUMENTO DE CONTINUIDAD DEL PROYECTO OFERTAPP — Aplicación web de
+descuentos para Uruguay
+
+OBJETIVO DE ESTE DOCUMENTO Este documento sirve como contexto e
+instrucciones para que otro agente de IA pueda continuar el desarrollo
+de OfertApp sin depender de la conversación anterior. El agente debe
+leerlo completo, revisar el repositorio y continuar desde el estado real
+de los archivos. No debe asumir que una funcionalidad está terminada si
+no puede comprobarlo.
+
+============================================================ 1. VISIÓN
+GENERAL DEL PROYECTO
+============================================================
+
+Nombre provisional: OfertApp
+
+OfertApp es una aplicación web para descubrir descuentos y promociones
+de supermercados, tiendas de ropa, marcas, farmacias, comercios de
+electrónica, hogar, deportes y otros establecimientos.
+
+Mercado inicial: Uruguay. Expansión futura: otros países. La
+arquitectura debe permitir agregar países, ciudades, monedas e idiomas
+sin tener que rehacer la aplicación.
+
+Propuesta de valor: - Los usuarios indican qué marcas, comercios y
+categorías les interesan. - Los comercios o administradores publican
+descuentos. - La aplicación identifica qué ofertas coinciden con las
+preferencias de cada usuario. - En una etapa posterior, los usuarios
+reciben notificaciones push personalizadas.
+
+La aplicación se desarrolla como proyecto de práctica y portfolio. El
+usuario quiere que un agente de IA genere la mayor parte del código y lo
+guíe paso a paso, con explicaciones claras y sin exigir conocimientos
+avanzados de programación.
+
+Idioma de la interfaz: español, con vocabulario natural de Uruguay (por
+ejemplo, “Encontrá”, “Buscá”, “descuentos”). Moneda inicial: peso
+uruguayo (UYU), mostrado como “$”. Diseño: moderno, limpio, minimalista,
+responsive, con predominio de blanco y violeta.
+
+============================================================ 2.
+TECNOLOGÍAS Y ARQUITECTURA
+============================================================
+
+Tecnologías previstas: - HTML5 para la estructura. - CSS3 para estilos y
+diseño responsive. - JavaScript para interacción y lógica del
+frontend. - Git y GitHub para control de versiones. - GitHub Pages para
+publicar la web estática. - Supabase, en una etapa posterior, para
+autenticación, base de datos y servicios backend. - Un proveedor o
+servicio compatible con notificaciones push web cuando se implemente esa
+etapa.
+
+Restricciones y decisiones importantes: - GitHub Pages aloja archivos
+estáticos. No ejecuta código backend ni administra por sí solo usuarios,
+contraseñas, procesos programados o notificaciones. - Nunca guardar
+contraseñas, claves secretas ni credenciales privadas en el código
+frontend o en el repositorio. - Para autenticación real, persistencia
+multiusuario, permisos y datos compartidos se deberá usar Supabase u
+otro backend adecuado. - Las notificaciones push requieren HTTPS,
+permiso explícito del usuario, service worker y un
+proveedor/infraestructura compatible. No prometer notificaciones hasta
+que estén implementadas y probadas. - La primera versión es una demo
+frontend con datos ficticios. No confundir datos de ejemplo con ofertas
+reales. - Mantener la solución sencilla al principio. Evitar frameworks
+complejos salvo que exista una razón concreta y el usuario acepte el
+cambio. - No introducir dependencias o servicios pagos sin explicar
+antes sus costos y alternativas. - Preparar el proyecto para escalar
+internacionalmente: los registros de usuarios, comercios y descuentos
+deberán relacionarse con país y, cuando corresponda, ciudad y moneda.
+
+============================================================ 3. ESTADO
+ACTUAL Y ENTORNO DEL USUARIO
+============================================================
+
+El usuario confirmó: - Editor: Visual Studio Code (VS Code). - Método de
+trabajo: prefiere que la IA genere el código y él lo implemente. -
+Repositorio GitHub: ya fue creado. - Nombre sugerido del repositorio:
+ofertapp. - Se indicó configurar GitHub Pages desde Settings > Pages >
+Build and deployment > Deploy from a branch > main > /(root).
+
+El usuario trabaja en un Mac, según el entorno mencionado anteriormente.
+En VS Code puede abrir la terminal desde Terminal > New Terminal. Live
+Server es una opción para probar localmente.
+
+Estructura inicial propuesta: ofertapp/ index.html css/ styles.css js/
+app.js data.js favorites.js assets/ images/ icons/ README.md
+
+IMPORTANTE: la primera versión se entregó como un único archivo
+index.html con HTML, CSS y JavaScript juntos, para facilitar el inicio.
+El siguiente agente debe inspeccionar el repositorio y comprobar qué
+archivos existen realmente. Si index.html contiene la primera versión,
+conservar su funcionalidad al refactorizar. No borrar ni reemplazar
+trabajo existente sin explicar el motivo.
+
+============================================================ 4.
+FUNCIONALIDADES DEL PRODUCTO
+============================================================
+
+MVP (primera versión funcional): 1. Página de inicio con descuentos
+destacados. 2. Buscador de marcas, productos, categorías y comercios. 3.
+Filtros por categorías. 4. Tarjetas de descuentos. 5. Detalle de cada
+descuento. 6. Guardar y quitar favoritos. 7. Registro e inicio de
+sesión. 8. Perfil del usuario. 9. Preferencias de marcas y categorías.
+10. Filtro por país y ciudad. 11. Panel de administración para crear y
+administrar descuentos. 12. Preparación para notificaciones
+personalizadas.
+
+Funcionalidades futuras: - Cuentas de comercios para que cada
+establecimiento gestione sus propias ofertas. - Aprobación/moderación de
+promociones. - Estadísticas para comercios: visualizaciones, clics y
+usuarios alcanzados. - Ofertas patrocinadas o destacadas. -
+Notificaciones push cuando una nueva oferta coincida con preferencias. -
+Internacionalización e idiomas adicionales. - Monedas y formatos locales
+por país.
+
+La primera versión no debe intentar implementar todo de una vez.
+Desarrollar y probar una etapa antes de avanzar.
+
+============================================================ 5.
+PANTALLAS Y EXPERIENCIA DE USUARIO
+============================================================
+
+Pantallas previstas:
+
+A. Inicio - Logo y navegación. - Mensaje principal y buscador. -
+Categorías. - Ofertas destacadas. - Ofertas recientes. - Tarjetas con
+imagen, marca, título, porcentaje de descuento, precio anterior, precio
+rebajado, ciudad y botón de favorito.
+
+B. Explorar categorías Categorías iniciales sugeridas: - Ropa -
+Supermercados - Electrónica - Hogar - Deportes - Farmacias Las
+categorías deben poder ampliarse y, en el futuro, administrarse desde
+datos, no quedar rígidamente codificadas.
+
+C. Marcas - Listado de marcas. - Búsqueda y filtro. - Acción para
+seguir/dejar de seguir una marca.
+
+D. Favoritos - Ofertas guardadas por el usuario. - Marcas seguidas.
+
+E. Registro e inicio de sesión - Crear cuenta. - Iniciar sesión. -
+Recuperar contraseña. - Validaciones y mensajes de error claros.
+
+F. Perfil - Nombre y email. - País y ciudad. - Preferencias de
+categorías y marcas. - Configuración de notificaciones y consentimiento.
+
+G. Detalle de descuento - Título y descripción. - Marca y comercio. -
+Imagen. - Precio original y precio final. - Porcentaje o importe de
+descuento. - Vigencia. - País, ciudad y condiciones de la promoción. -
+Enlace externo si existe.
+
+H. Administración - Crear, editar, activar, desactivar y eliminar
+descuentos. - Administrar marcas, comercios y categorías. - Control de
+vigencia. - En una fase posterior, roles y paneles separados por
+comercio.
+
+Diseño: - Responsive: escritorio, tablet y móvil. - En móvil, navegación
+clara y controles cómodos al tacto. - Accesibilidad básica: etiquetas,
+contraste, navegación por teclado, textos alternativos. - Mantener
+identidad visual blanca y violeta, con jerarquía tipográfica clara.
+
+============================================================ 6. MODELO
+DE DATOS PROPUESTO
+============================================================
+
+Diseñar las relaciones pensando en Supabase/PostgreSQL. No almacenar
+listas complejas de marcas/categorías como texto separado por comas si
+se necesitan relaciones consultables.
+
+Tablas sugeridas:
+
+countries - id - name - iso_code - default_currency - default_language -
+active
+
+cities - id - name - country_id
+
+profiles - id (relación con el usuario de autenticación) - full_name -
+country_id - city_id - role (user, merchant, admin) -
+notifications_enabled - created_at
+
+categories - id - name - slug - active
+
+merchants - id - name - description - logo_url - country_id - city_id
+(nullable si opera a nivel nacional) - address - website - active
+
+brands - id - name - logo_url - category_id (si corresponde) - active
+
+merchant_brands (si se necesita relación muchos-a-muchos) -
+merchant_id - brand_id
+
+discounts - id - title - description - image_url - discount_type
+(percentage, fixed_amount, other) - discount_value - original_price -
+discounted_price - currency_code - starts_at - ends_at - active -
+country_id - city_id (nullable para ofertas nacionales) - merchant_id -
+brand_id (nullable) - category_id - terms - external_url - created_at
+
+user_brand_preferences - user_id - brand_id
+
+user_category_preferences - user_id - category_id
+
+favorite_discounts - user_id - discount_id - created_at
+
+notifications (registro/historial; no necesariamente el envío en sí) -
+id - user_id - discount_id - sent_at - read_at - status
+
+Reglas: - Un usuario puede seguir muchas marcas y categorías. - Una
+marca puede tener muchos descuentos. - Un comercio puede publicar muchos
+descuentos. - Una categoría puede tener muchos descuentos. - Una oferta
+puede ser nacional o estar limitada a una ciudad. - Todos los descuentos
+deben tener país y moneda. - Definir índices y restricciones de unicidad
+cuando corresponda. - En Supabase, configurar Row Level Security (RLS)
+antes de usar datos reales. - Un usuario normal solo debe poder leer y
+modificar sus propios datos privados. - Un comercio solo debe poder
+administrar sus propios descuentos. - Solo administradores autorizados
+pueden administrar catálogos globales o aprobar promociones.
+
+============================================================ 7. LÓGICA
+DE OFERTAS Y PREFERENCIAS
+============================================================
+
+La lógica futura de coincidencia debe contemplar: - La oferta coincide
+con una marca seguida por el usuario, o con una categoría elegida. - El
+país de la oferta coincide con el país del usuario. - Si la oferta tiene
+una ciudad específica, coincide con la ciudad del usuario. Si city_id es
+null, puede considerarse nacional dentro del país. - La oferta está
+activa y dentro del período de vigencia. - El usuario tiene habilitadas
+las notificaciones. - El usuario no debe recibir duplicados de la misma
+oferta. - Deben existir límites de frecuencia y preferencias de horario
+para evitar spam.
+
+Antes de enviar una notificación, comprobar vigencia, coincidencia,
+permisos y deduplicación. No implementar envíos desde el navegador
+usando secretos expuestos.
+
+============================================================ 8. PRIMERA
+VERSIÓN FRONTEND YA PROPUESTA
+============================================================
+
+En la conversación anterior se proporcionó un index.html autocontenido
+con: - Estilos CSS incluidos en
+. - Datos ficticios de seis ofertas: Nike, Zara, Samsung, Tienda
+Inglesa, Adidas e IKEA. - Categorías: Todas, Ropa, Supermercados,
+Electrónica, Hogar y Deportes. - Buscador por marca, título, categoría y
+ciudad. - Tarjetas con imagen de placeholder, porcentaje, precios y
+ciudad. - Favoritos guardados con localStorage. - Enlace para filtrar
+favoritos. - Botón de perfil que muestra un mensaje de “próximamente”. -
+Diseño responsive con grilla adaptable.
+
+Los precios y descuentos de esos registros son exclusivamente de
+demostración. No representan promociones reales ni deben presentarse
+como vigentes.
+
+Comportamiento conocido de la demo: - Los favoritos se guardan en el
+navegador mediante localStorage y no se sincronizan entre
+dispositivos. - No hay autenticación real. - No hay base de datos
+remota. - No hay panel administrativo funcional. - No hay notificaciones
+push. - Las imágenes usan placehold.co; se pueden reemplazar más
+adelante por imágenes propias o autorizadas.
+
+El agente debe revisar el archivo real del repositorio antes de
+modificarlo. Si el archivo no existe, pedir al usuario que confirme o
+ayudarlo a reconstruirlo. No afirmar que el código fue publicado hasta
+verificarlo.
+
+============================================================ 9. PLAN DE
+TRABAJO POR ETAPAS
+============================================================
+
+ETAPA 1 — Verificar entorno y publicación - Revisar repositorio
+ofertapp. - Verificar que index.html esté en la raíz. - Probar
+localmente con Live Server. - Configurar GitHub Pages desde Settings >
+Pages. - Confirmar que el sitio publicado carga correctamente. -
+Resolver errores antes de seguir.
+
+ETAPA 2 — Refactorizar archivos Separar el archivo autocontenido en: -
+index.html - css/styles.css - js/data.js - js/app.js - js/favorites.js -
+assets/images/ Mantener las funcionalidades existentes. Usar rutas
+relativas para que funcione bajo GitHub Pages en una ruta de proyecto.
+
+ETAPA 3 — Mejorar la interfaz - Diseño responsive pulido. - Navegación
+real entre vistas o secciones. - Estados vacíos y mensajes de error. -
+Detalle de descuentos. - Mejoras de accesibilidad. - Imágenes apropiadas
+y autorizadas.
+
+ETAPA 4 — Preferencias de usuario en modo demo - Simular selección de
+marcas y categorías. - Guardar preferencias localmente al principio. -
+Mostrar qué ofertas coinciden con esas preferencias. - Diferenciar
+claramente los datos locales de los datos reales.
+
+ETAPA 5 — Supabase - Crear proyecto Supabase. - Crear tablas y
+relaciones. - Configurar autenticación. - Configurar RLS y políticas de
+seguridad. - Conectar frontend mediante la clave pública
+anon/publishable apropiada. - Nunca exponer service_role key ni otros
+secretos. - Migrar favoritos y preferencias desde localStorage cuando
+corresponda. - Probar registro, inicio de sesión y recuperación.
+
+ETAPA 6 — Administración - Crear vistas protegidas para
+administradores. - Alta, edición y baja lógica de descuentos. - Gestión
+de marcas, comercios y categorías. - Validar fechas, precios, moneda,
+país y ciudad. - Agregar permisos y controles de seguridad.
+
+ETAPA 7 — Comercios - Definir alta y aprobación de comercios. - Permitir
+que cada comercio gestione solamente sus promociones. - Diseñar roles y
+políticas RLS específicas. - Considerar moderación antes de publicar.
+
+ETAPA 8 — Notificaciones - Investigar proveedor compatible con web push
+y Supabase. - Implementar service worker y suscripción push con
+consentimiento. - Guardar suscripciones de forma segura en backend. -
+Procesar coincidencias en un entorno backend/función segura. - Respetar
+preferencias, horarios, límites y deduplicación. - Probar en navegadores
+compatibles y documentar limitaciones en iOS. - No enviar notificaciones
+comerciales sin consentimiento y controles adecuados.
+
+ETAPA 9 — Pruebas y lanzamiento - Probar en Chrome, Safari y navegadores
+móviles. - Probar distintos tamaños de pantalla. - Verificar
+formularios, filtros, favoritos y permisos. - Comprobar que no haya
+claves secretas en el repositorio. - Verificar enlaces, accesibilidad y
+rendimiento. - Actualizar README con instalación, configuración y
+publicación.
+
+============================================================ 10. FLUJO
+DE TRABAJO CON GITHUB
+============================================================
+
+El usuario usa VS Code en Mac.
+
+Flujo básico para guardar cambios:
+
+1.  Abrir la carpeta del repositorio en VS Code.
+2.  Modificar los archivos.
+3.  Probar localmente.
+4.  Abrir Terminal > New Terminal.
+5.  Ejecutar:
+
+git status git add . git commit -m “Descripción breve del cambio” git
+push origin main
+
+GitHub Pages publicará los cambios si está configurado para desplegar
+desde main y la carpeta raíz.
+
+URL habitual: https://NOMBRE-DE-USUARIO.github.io/ofertapp/
+
+Reemplazar NOMBRE-DE-USUARIO por el usuario real de GitHub. No inventar
+ni asumir la URL exacta.
+
+Si git push falla, revisar el mensaje de error, la rama actual, el
+remote y la autenticación. No borrar configuraciones para “arreglarlo”
+sin entender el problema.
+
+============================================================ 11. CÓMO
+DEBE TRABAJAR EL SIGUIENTE AGENTE DE IA
+============================================================
+
+-   Continuar en español.
+-   Dar instrucciones paso a paso, adecuadas para alguien que usa VS
+    Code y prefiere que la IA genere el código.
+-   Explicar brevemente qué hace cada archivo y cada cambio.
+-   Antes de proponer modificaciones, inspeccionar el estado actual del
+    repositorio o pedir al usuario los archivos relevantes si no tiene
+    acceso.
+-   No asumir que puede acceder directamente a GitHub o modificar el
+    repositorio.
+-   Entregar código completo de cada archivo cuando sea más sencillo que
+    indicar cambios parciales.
+-   Especificar claramente la ruta donde debe guardarse cada archivo.
+-   No omitir imports, etiquetas de cierre ni dependencias necesarias.
+-   Evitar reemplazar archivos existentes sin advertir qué se perdería.
+-   Después de cada etapa, indicar cómo probarla y qué resultado debería
+    ver el usuario.
+-   Si aparece un error, pedir el mensaje exacto o el contenido
+    relevante y resolverlo antes de continuar.
+-   No avanzar muchas etapas de una vez. Mantener un ciclo: implementar,
+    probar, corregir y confirmar.
+-   No afirmar que algo está publicado, conectado o funcionando si no se
+    verificó.
+-   Distinguir siempre entre datos ficticios, funcionalidades simuladas
+    y servicios reales.
+-   Priorizar seguridad, privacidad, accesibilidad y facilidad de
+    mantenimiento.
+-   Antes de añadir servicios externos, explicar para qué sirven, si
+    tienen plan gratuito y qué costos podrían aparecer.
+-   No agregar funciones innecesarias ni cambiar la visión del producto
+    sin consultarlo.
+
+============================================================ 12. PRÓXIMA
+ACCIÓN CONCRETA
+============================================================
+
+Al retomar el proyecto, el agente debe:
+
+1.  Saludar brevemente y confirmar que leyó este documento.
+2.  Pedir o revisar el contenido/estructura actual del repositorio
+    ofertapp.
+3.  Confirmar si index.html ya está creado y si contiene la primera
+    demo.
+4.  Guiar al usuario para probarlo con Live Server.
+5.  Si funciona, separar HTML, CSS y JavaScript en los archivos
+    previstos sin perder funcionalidades.
+6.  Verificar la publicación mediante GitHub Pages.
+7.  Continuar con la selección de preferencias de marcas y categorías.
+
+La prioridad inmediata no es Supabase ni las notificaciones. Es tener
+una primera aplicación web clara, funcional, publicada y entendida por
+el usuario.
+
+FIN DEL DOCUMENTO
