@@ -1,0 +1,628 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Descubrí los mejores descuentos y promociones de Uruguay con OfertApp.">
+  <title>OfertApp | Encontrá tus descuentos</title>
+
+  <style>
+    :root {
+      --primary: #7047eb;
+      --primary-dark: #5631c7;
+      --background: #f7f7fb;
+      --text: #242238;
+      --muted: #77758a;
+      --white: #ffffff;
+      --border: #eae8f1;
+      --green: #159b68;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+    }
+
+    header {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 18px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 25px;
+      font-weight: 800;
+      color: var(--primary);
+    }
+
+    .logo span {
+      color: var(--text);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+    }
+
+    nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .profile {
+      background: #eee9ff;
+      color: var(--primary);
+      border: 0;
+      padding: 11px 18px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 24px;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #7047eb, #9a71f5);
+      color: white;
+      border-radius: 22px;
+      padding: 48px;
+      margin-bottom: 38px;
+    }
+
+    .hero h1 {
+      font-size: clamp(30px, 5vw, 44px);
+      margin-bottom: 14px;
+    }
+
+    .hero p {
+      font-size: 16px;
+      opacity: .9;
+      margin-bottom: 25px;
+    }
+
+    .search {
+      display: flex;
+      max-width: 570px;
+      background: white;
+      border-radius: 12px;
+      padding: 6px;
+      gap: 8px;
+    }
+
+    .search input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      outline: none;
+      padding: 12px;
+      font-size: 15px;
+    }
+
+    .search button {
+      border: 0;
+      background: var(--primary);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 12px;
+    }
+
+    .section-title h2 {
+      font-size: 23px;
+    }
+
+    .section-title p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 38px;
+    }
+
+    .category {
+      background: white;
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .category.active,
+    .category:hover {
+      background: var(--primary);
+      color: white;
+      border-color: var(--primary);
+    }
+
+    .offers {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .offer-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 17px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+
+    .offer-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 28px rgba(40, 30, 80, .09);
+    }
+
+    .offer-image {
+      height: 180px;
+      position: relative;
+      background: #eeeaf8;
+    }
+
+    .offer-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .discount {
+      position: absolute;
+      top: 13px;
+      left: 13px;
+      background: #ff4e71;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-weight: 800;
+    }
+
+    .offer-info {
+      padding: 18px;
+    }
+
+    .brand {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .offer-info h3 {
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+
+    .prices {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .new-price {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .old-price {
+      color: #999;
+      text-decoration: line-through;
+      font-size: 14px;
+    }
+
+    .offer-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      gap: 8px;
+    }
+
+    .location {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .favorite {
+      background: #f2efff;
+      color: var(--primary);
+      border: 0;
+      border-radius: 8px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .favorite.saved {
+      background: #ffe8ef;
+      color: #e63c68;
+    }
+
+    .empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      margin-top: 50px;
+      background: white;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 800px) {
+      .offers {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      nav {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 580px) {
+      header {
+        padding: 16px 20px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      main {
+        padding: 25px 16px;
+      }
+
+      .hero {
+        padding: 30px 22px;
+      }
+
+      .offers {
+        grid-template-columns: 1fr;
+      }
+
+      .section-title h2 {
+        font-size: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">Ofert<span>App.</span></div>
+
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#ofertas">Ofertas</a>
+      <a href="#favoritos" id="favorites-link">Favoritos</a>
+    </nav>
+
+    <button class="profile" id="profile-button">Mi perfil</button>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <h1>¡Encontrá las mejores ofertas!</h1>
+      <p>Todos los descuentos de tus marcas favoritas en un solo lugar.</p>
+
+      <div class="search">
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Buscá marcas, productos o comercios..."
+        >
+        <button id="search-button">Buscar</button>
+      </div>
+    </section>
+
+    <section id="categorias">
+      <div class="section-title">
+        <h2>Explorá categorías</h2>
+      </div>
+
+      <div class="categories">
+        <button class="category active" data-category="Todas">✨ Todas</button>
+        <button class="category" data-category="Ropa">👕 Ropa</button>
+        <button class="category" data-category="Supermercados">🛒 Supermercados</button>
+        <button class="category" data-category="Electrónica">📱 Electrónica</button>
+        <button class="category" data-category="Hogar">🏠 Hogar</button>
+        <button class="category" data-category="Deportes">⚽ Deportes</button>
+      </div>
+    </section>
+
+    <section id="ofertas">
+      <div class="section-title">
+        <div>
+          <h2 id="offers-title">Ofertas destacadas 🔥</h2>
+          <p>Descuentos de ejemplo para Uruguay</p>
+        </div>
+        <p id="offer-count"></p>
+      </div>
+
+      <div class="offers" id="offers-container"></div>
+    </section>
+
+  </main>
+
+  <footer>
+    OfertApp © 2026 · Encontrá, compará y ahorrá.
+    <br><br>
+    Proyecto de práctica desarrollado para Uruguay.
+  </footer>
+
+  <script>
+    const offers = [
+      {
+        id: 1,
+        brand: "Nike",
+        title: "Calzado deportivo",
+        category: "Deportes",
+        discount: 40,
+        price: 3599,
+        oldPrice: 5999,
+        city: "Montevideo",
+        image: "https://placehold.co/600x400/eee8ff/7047eb?text=NIKE"
+      },
+      {
+        id: 2,
+        brand: "Zara",
+        title: "Colección de invierno",
+        category: "Ropa",
+        discount: 30,
+        price: 2100,
+        oldPrice: 3000,
+        city: "Montevideo",
+        image: "https://placehold.co/600x400/f8e8ef/c94c83?text=ZARA"
+      },
+      {
+        id: 3,
+        brand: "Samsung",
+        title: "Smartphone Galaxy",
+        category: "Electrónica",
+        discount: 25,
+        price: 14999,
+        oldPrice: 19999,
+        city: "Canelones",
+        image: "https://placehold.co/600x400/e8f1ff/3274c8?text=SAMSUNG"
+      },
+      {
+        id: 4,
+        brand: "Tienda Inglesa",
+        title: "Descuento en alimentos",
+        category: "Supermercados",
+        discount: 20,
+        price: 800,
+        oldPrice: 1000,
+        city: "Montevideo",
+        image: "https://placehold.co/600x400/e7f7ec/159b68?text=SUPERMERCADO"
+      },
+      {
+        id: 5,
+        brand: "Adidas",
+        title: "Remeras deportivas",
+        category: "Deportes",
+        discount: 35,
+        price: 1300,
+        oldPrice: 2000,
+        city: "Maldonado",
+        image: "https://placehold.co/600x400/fff0dc/bb7730?text=ADIDAS"
+      },
+      {
+        id: 6,
+        brand: "IKEA",
+        title: "Artículos para el hogar",
+        category: "Hogar",
+        discount: 15,
+        price: 1700,
+        oldPrice: 2000,
+        city: "Montevideo",
+        image: "https://placehold.co/600x400/e8f5f5/277b78?text=HOGAR"
+      }
+    ];
+
+    let selectedCategory = "Todas";
+    let searchTerm = "";
+    let showFavorites = false;
+
+    let favorites = JSON.parse(
+      localStorage.getItem("ofertapp-favorites") || "[]"
+    );
+
+    const container = document.getElementById("offers-container");
+    const count = document.getElementById("offer-count");
+
+    function formatPrice(price) {
+      return "$ " + price.toLocaleString("es-UY");
+    }
+
+    function renderOffers() {
+      let filteredOffers = offers.filter(offer => {
+        const matchesCategory =
+          selectedCategory === "Todas" ||
+          offer.category === selectedCategory;
+
+        const searchText =
+          `${offer.brand} ${offer.title} ${offer.category} ${offer.city}`
+          .toLowerCase();
+
+        const matchesSearch = searchText.includes(searchTerm);
+
+        const matchesFavorite =
+          !showFavorites || favorites.includes(offer.id);
+
+        return matchesCategory && matchesSearch && matchesFavorite;
+      });
+
+      count.textContent = `${filteredOffers.length} ofertas`;
+
+      if (showFavorites) {
+        document.getElementById("offers-title").textContent =
+          "Mis ofertas favoritas ❤️";
+      } else {
+        document.getElementById("offers-title").textContent =
+          selectedCategory === "Todas"
+            ? "Ofertas destacadas 🔥"
+            : selectedCategory;
+      }
+
+      if (filteredOffers.length === 0) {
+        container.innerHTML =
+          '<div class="empty">No encontramos ofertas. ¡Probá otra búsqueda!</div>';
+        return;
+      }
+
+      container.innerHTML = filteredOffers.map(offer => `
+        <article class="offer-card">
+          <div class="offer-image">
+            <img src="${offer.image}" alt="${offer.brand}"
+              loading="lazy">
+            <span class="discount">-${offer.discount}%</span>
+          </div>
+
+          <div class="offer-info">
+            <p class="brand">${offer.brand}</p>
+            <h3>${offer.title}</h3>
+
+            <div class="prices">
+              <span class="new-price">${formatPrice(offer.price)}</span>
+              <span class="old-price">${formatPrice(offer.oldPrice)}</span>
+            </div>
+
+            <div class="offer-footer">
+              <span class="location">📍 ${offer.city}</span>
+              <button
+                class="favorite ${favorites.includes(offer.id) ? "saved" : ""}"
+                data-id="${offer.id}"
+              >
+                ${favorites.includes(offer.id) ? "♥ Guardado" : "♡ Favorito"}
+              </button>
+            </div>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    document.querySelectorAll(".category").forEach(button => {
+      button.addEventListener("click", () => {
+        selectedCategory = button.dataset.category;
+        showFavorites = false;
+
+        document.querySelectorAll(".category").forEach(item => {
+          item.classList.remove("active");
+        });
+
+        button.classList.add("active");
+        renderOffers();
+      });
+    });
+
+    function searchOffers() {
+      searchTerm = document.getElementById("search-input")
+        .value.trim().toLowerCase();
+
+      showFavorites = false;
+      renderOffers();
+    }
+
+    document.getElementById("search-button")
+      .addEventListener("click", searchOffers);
+
+    document.getElementById("search-input")
+      .addEventListener("input", searchOffers);
+
+    container.addEventListener("click", event => {
+      const button = event.target.closest(".favorite");
+
+      if (!button) return;
+
+      const id = Number(button.dataset.id);
+
+      if (favorites.includes(id)) {
+        favorites = favorites.filter(item => item !== id);
+      } else {
+        favorites.push(id);
+      }
+
+      localStorage.setItem(
+        "ofertapp-favorites",
+        JSON.stringify(favorites)
+      );
+
+      renderOffers();
+    });
+
+    document.getElementById("favorites-link")
+      .addEventListener("click", event => {
+        event.preventDefault();
+        showFavorites = true;
+        selectedCategory = "Todas";
+
+        document.querySelectorAll(".category").forEach(item => {
+          item.classList.toggle(
+            "active",
+            item.dataset.category === "Todas"
+          );
+        });
+
+        renderOffers();
+      });
+
+    document.getElementById("profile-button")
+      .addEventListener("click", () => {
+        alert("¡Próximamente! Vamos a crear tu perfil de usuario.");
+      });
+
+    renderOffers();
+  </script>
+
+</body>
+</html>
